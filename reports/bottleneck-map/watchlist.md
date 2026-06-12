@@ -422,7 +422,7 @@ FY2026全年业绩（2026-05-15发布）同时披露FY2027经营指引：
 
 ## 观察中（信号强度★★）
 
-### 10. Almonty Industries（TSX:AII / OTC:ALM）★★★ 【2026-05-26午后 新增 | 2026-06-02 升级★★→★★★（SeAH M&S钼矿独家offtake）】
+### 10. Almonty Industries（TSX:AII / OTC:ALM）★★★★ 【2026-05-26午后 新增 | 2026-06-02 升级★★→★★★（SeAH M&S钼矿独家offtake）| 2026-06-12 升级★★★→★★★★（Phase 2隐含获批+$700M可转债结算+Russell 1000 T-17天）】
 **代码**：AII.TO（TSX）/ ALM（OTC）  
 **瓶颈环节**：西方钨矿供应（S级跨趋势瓶颈——AI+国防+工业）  
 **市值**：C$5.22B（约$3.8B USD）  
@@ -457,12 +457,13 @@ FY2026全年业绩（2026-05-15发布）同时披露FY2027经营指引：
 - 🆕⚡ **【2026-05-30 第六十八轮 首次记录】Russell 1000 + Russell 3000指数纳入（June 29生效）**：FTSE Russell 2026-05-22公布初步名单（Business Wire/Investing.com/TipRanks多源确认）；被动ETF/共同基金在June 29强制按权重买入ALM；**注意**：纯市场微结构事件，价格上涨→安全边际进一步压缩，纳入前后均不是追高买点；历史上"sell the news"发生概率较高。来源：[Business Wire](https://www.theglobeandmail.com/investing/markets/markets-news/Business%20Wire/2172744/almonty-industries-set-to-join-large-cap-russell-1000-index-and-broad-market-russell-3000-index/) | [Investing.com](https://www.investing.com/news/company-news/almonty-industries-set-to-join-russell-1000-and-3000-indexes-93CH-4714139)
 - 📋 **Sangdong钼矿【2026-05-27 首次记录 | 2026-05-27第二十八轮细节补录】**：已获全部采矿+环境许可；2026年底投产；60年矿山寿命；**独家offtake协议：SeAH M&S（韩国最大钼制品加工商，同时是SpaceX承包商）**购买全部产出，地板价$19/lb；满产5,600吨/年 × $19/lb × 2,204.6 lb/t ≈ **$234M/年地板价年收入**；60年合同总价值$14B+。SeAH M&S-SpaceX连接意味钼矿产出有航天终端需求背书（来源：MINING.COM "Almonty enters molybdenum offtake deal with SpaceX contractor SeAH"）
 
-**待验证事项**：
-- **June 9 Phase 2投票结果（最关键）**：通过→考虑升★★★；未通过→维持★★；要求同步看Sangdong Q2产量
-- **Q2 Sangdong实际产量**：H2 2026季度收入>$80M（Phase 1~50%爬坡）为升级信号
+**待验证事项（2026-06-12更新）**：
+- ✅ ~~**June 9 Phase 2投票结果（最关键）**~~：**2026-06-12已隐含确认获批**——"Phase II completion targeted 2027"（Kalkine/Geomechanics.io）；等待Almonty官方6-K正式披露投票具体数字
+- **Q2 Sangdong实际产量**（最新最关键）：H2 2026季度收入>$80M（Phase 1~50%爬坡）为★★★★★升级信号；Q3 2026财报为首批数据
+- **$543M并购目标**：用途尚未公开披露；关注H2 2026公告
 - Montana Gentung项目H2 2026时间线可信度
-- 钨价能否维持高位（当前trailing 12月+900%，APT $3,185/MTU）
-- Phase 2（2027年，460,000 MTU/年）推进进度
+- 钨价能否维持高位（APT ~$3,185/MTU；中国国内下跌55%中期风险）
+- Phase 2施工进度（2027年，1.2Mt/年，4,600 MTU/年WC输出）
 
 **【2026-06-02 第五十二轮 评级升级★★→★★★：SeAH M&S钼矿独家offtake（全新信号）】**：
 - Sangdong钼矿（AKMC子公司开发，**独立于Phase 2钨矿**）与SeAH M&S签订全矿期（60年）100%产量exclusive offtake
@@ -474,6 +475,13 @@ FY2026全年业绩（2026-05-15发布）同时披露FY2027经营指引：
 - 来源：[Nasdaq公告](https://www.nasdaq.com/press-release/almonty-industries-has-entered-offtake-agreement-seah-group-korean-steel-giant-and) | [Mining.com](https://www.mining.com/almonty-enters-molybdenum-offtake-deal-with-spacex-contractor-seah/)
 
 **评级升★★★**：钼矿deal是实质性新增收入流（底价保护+独家+全矿期），前向P/S改善至11x（黄灯），但仍无盈利、10年25xPE退出无安全边际；升级理由是基本面改善+可投资性提升，而非安全边际已建立。Phase 2投票（June 8）若通过则考虑执行 `/investment-team`。
+
+**【2026-06-12 23:50 评级升★★★→★★★★：Phase 2隐含获批 + $700M可转债 + Russell 1000 T-17天】**
+- ✅ **Phase 2隐含获批（AGM 6/9）**：Kalkine等多家外媒确认"Phase II completion at Sangdong targeted during 2027"，意味AGM通过Phase 2议案；处理产能640K→1.2Mt/年，WC产出2,300→4,600 t/年（约覆盖全球西方需求40%）；前向P/S（Phase 2满产）从~8-11x降至**~4.6x** → ✅ 估值绿灯
+- ✅ **$700M可转债成功结算（6/9）**：2.25%利率、2031年到期，超额认购；含capped-call交易（~$83M）对冲稀释；~$543M用于并购/营运资本（钨资产扩张弹药）；~$50M偿还现有债务。来源：[TipRanks](https://www.tipranks.com/news/company-announcements/almonty-industries-plans-700-million-convertible-notes-offering-to-refinance-debt-and-support-tungsten-expansion) / [Ad-hoc-News超额认购确认](https://www.ad-hoc-news.de/boerse/news/ueberblick/almonty-industries-inc-stock-ca0203987072-oversubscribed-700-million/69510582)
+- ✅ **Russell 1000® T-17天（6/29生效）**：已于5/30首次记录；当前距纳入仅17天；$12.2T跟踪资金机械建仓；Countermeasures纳入已确认（Morningstar/BW/Investing.com多源）
+- **估值安全边际更新**：前向PS ~4.6x（Phase 2满产）→ 绿灯；10年25xPE退出在无Phase 3/收购情景下年化回报<3%，但$543M并购资金提供扩张路径；评级★★★★具合理依据，但不追高——等Phase 2产能爬坡数据（Q3 2026）
+- **新待验证事项**：①Phase 2正式6-K文件确认；②$543M并购目标揭晓；③Q3 2026 Sangdong产量数据（Phase 2施工进度）
 **【2026-05-27 午后 钨价分化警示】**：
 - 中国国内APT 2026-05-19已从峰值下跌**55.3%**（至RMB 680,000/吨）
 - 欧洲国际APT仍为**$3,000-3,280/MTU**（较2026年初+241%）
@@ -2890,6 +2898,38 @@ H1 2026完整财报（2026-06-02发布）：
 | **7/1（T-19天）** | Central Glass WF6永久停产 | 4047.T ★★★★★ | 🔴最高 |
 | **7/1（T-19天）** | Nittobo 5:1股票分拆 | 3110.T ★★★★ | 🟡中 |
 | **7/4（T-22天）** | DOE ≥3台反应堆临界 | LEU ★★★★★ | 🔴高 |
+| **8/5** | ICL Q2财报 | ICL ★★★★ | 🔴高 |
+| **8/11** | 美伊停火到期 | ICL ★★★★ | 🔴高 |
+| **8/12** | 关东电化Q1 FY2027财报 | 4047.T ★★★★★ | 🔴高 |
+
+---
+
+## 更新：2026-06-12 23:50（本日末轮扫描）
+
+### 状态变化汇总
+
+| 公司 | 代码 | 变化 | 最新评级 |
+|------|------|------|---------|
+| **Almonty Industries** | **ALM/AII.TO** | **★★★→★★★★ 升级（三重叠加）**：①Phase 2隐含获批（"2027年完工目标"写入公开披露）；②$700M可转债6/9结算（超额认购，capped-call对冲稀释，$543M并购弹药）；③Russell 1000® 6/29生效（T-17天，$12.2T跟踪资金机械建仓）。前向PS ~4.6x（Phase 2满产）→ 估值绿灯。10年25xPE退出无Phase 3情景下年化<3%，但并购路径存在。 | **★★★★（从★★★升级）** |
+
+### 背景信号（无新标的）
+
+| 信号 | 内容 | 影响标的 |
+|------|------|---------|
+| 美国弹药补库多年周期 | 伊朗战争消耗：Tomahawk 47个月生产周期，JASSM 48个月；CSIS确认需"数年"补库；全球（美/海湾/乌克兰/日本）同时抢购 | CHG.L论点强化（★★★★维持） |
+| SiC产能过剩 | EV放缓致利用率降至~50%；2027-2028才可能回转；非瓶颈 | 不追踪 |
+| InP/EML 800G供不应求 | 产量较需求低40-60%；Nvidia $40亿锁定Lumentum+Coherent；非Nvidia交期>2027 | AXTI维持★★红灯 |
+
+### 下一轮重点（更新版）
+
+| 日期 | 事件 | 标的 | 优先级 |
+|------|------|------|-------|
+| **6/29（T-17天）** | **ALM Russell 1000纳入生效** | ALM/AII.TO ★★★★ | 🟡中（技术买入） |
+| **6/30（T-18天）** | **LEU DOE Option 1b行权截止** | LEU ★★★★★ | 🔴最高 |
+| **7/1（T-19天）** | **Central Glass WF6永久停产** | 4047.T ★★★★★ | 🔴最高 |
+| **7/1（T-19天）** | Nittobo 5:1股票分拆 | 3110.T ★★★★ | 🟡中 |
+| **7/4（T-22天）** | DOE ≥3台反应堆临界 | LEU ★★★★★ | 🔴高 |
+| **Q3 2026** | ALM Phase 2施工+Sangdong产量首披露 | ALM/AII.TO ★★★★ | 🔴高（升★★★★★触发条件） |
 | **8/5** | ICL Q2财报 | ICL ★★★★ | 🔴高 |
 | **8/11** | 美伊停火到期 | ICL ★★★★ | 🔴高 |
 | **8/12** | 关东电化Q1 FY2027财报 | 4047.T ★★★★★ | 🔴高 |
