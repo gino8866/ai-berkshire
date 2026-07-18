@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小米｜业绩筑底，估值先跌</title>
+  <style>
+    :root {
+      --orange: #ff6900;
+      --ink: #191919;
+      --paper: #f7f6f3;
+      --cream: #fff2e7;
+      --muted: #706f6b;
+      --line: #d8d4cc;
+      --risk: #b42318;
+      --good: #147a58;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #151515; }
+    body {
+      color: var(--ink);
+      font-family: MiSans, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .viewer { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    .carousel {
+      position: relative;
+      width: min(100%, 540px);
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .35);
+    }
+    .page { position: absolute; inset: 0; display: none; padding: 44px 40px 34px; flex-direction: column; background: var(--paper); overflow: hidden; }
+    .page.active { display: flex; }
+    .page--ink { color: #fff; background: var(--ink); }
+    .page::after { content: ""; position: absolute; width: 360px; height: 360px; right: -178px; bottom: -190px; border: 1px solid rgba(255, 105, 0, .42); border-radius: 50%; pointer-events: none; }
+    .page--ink::after { border-color: rgba(255, 105, 0, .78); }
+    .topline { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; min-height: 25px; }
+    .logo { width: 110px; height: auto; }
+    .page-no { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+    .page--ink .page-no { color: rgba(255, 255, 255, .56); }
+    .kicker { margin-top: 38px; color: var(--orange); font-size: 13px; font-weight: 800; letter-spacing: .09em; }
+    h1, h2, h3, p { margin: 0; text-wrap: pretty; }
+    h1 { margin-top: 22px; max-width: 380px; font-size: clamp(40px, 10vw, 56px); font-weight: 800; line-height: 1.05; letter-spacing: -.07em; }
+    h2 { margin-top: 17px; font-size: clamp(31px, 7.6vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -.055em; }
+    h3 { font-size: 17px; line-height: 1.25; }
+    .lead { margin-top: 18px; max-width: 365px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+    .page--ink .lead { color: rgba(255,255,255,.66); }
+    .orange { color: var(--orange); }
+    .meta { display: flex; flex-wrap: wrap; gap: 7px 15px; margin-top: auto; position: relative; z-index: 1; color: rgba(255,255,255,.57); font-size: 11px; line-height: 1.5; }
+    .v0-note { display: inline-flex; width: fit-content; margin-top: auto; padding: 7px 9px; color: var(--muted); border: 1px dashed var(--line); font-size: 11px; line-height: 1.4; }
+    .page--ink .v0-note { color: rgba(255,255,255,.65); border-color: rgba(255,255,255,.3); }
+    .cover-visual { position: absolute; right: 28px; bottom: 102px; width: 168px; height: 237px; display: grid; place-items: center; border: 1px dashed rgba(255,255,255,.46); color: rgba(255,255,255,.65); font-size: 12px; line-height: 1.55; text-align: center; transform: rotate(6deg); }
+    .cover-word { position: absolute; right: -9px; bottom: 18px; color: rgba(255,255,255,.055); font-size: 110px; font-weight: 800; letter-spacing: -.11em; }
+    .business-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: auto; }
+    .metric { min-height: 156px; padding: 17px; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; background: rgba(255,255,255,.55); }
+    .metric--accent { color: #fff; background: var(--orange); border-color: var(--orange); }
+    .metric .number { font-size: 34px; font-weight: 800; letter-spacing: -.06em; }
+    .metric p { color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .metric--accent p { color: rgba(255,255,255,.8); }
+    .metric small { font-size: 11px; color: var(--good); font-weight: 700; }
+    .metric--accent small { color: rgba(255,255,255,.85); }
+    .signal { margin-top: auto; padding: 21px 20px; background: var(--cream); border-top: 4px solid var(--orange); }
+    .signal p { margin-top: 10px; font-size: 20px; font-weight: 750; line-height: 1.38; letter-spacing: -.035em; }
+    .ladder { display: grid; gap: 13px; margin-top: auto; }
+    .ladder-row { display: grid; grid-template-columns: 84px 1fr 47px; gap: 10px; align-items: center; font-size: 13px; }
+    .ladder-row b { text-align: right; font-size: 15px; }
+    .bar { height: 20px; background: #ddd9d1; }
+    .bar span { display: block; height: 100%; background: var(--orange); }
+    .bar--ink span { background: var(--ink); }
+    .fact { margin-top: 22px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .ecosystem { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-top: auto; }
+    .eco { min-height: 132px; padding: 16px; border: 1px solid var(--line); background: #fff; }
+    .eco strong { display: block; color: var(--orange); font-size: 28px; letter-spacing: -.05em; }
+    .eco p { margin-top: 7px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .pressure { display: grid; gap: 14px; margin-top: auto; }
+    .pressure-item { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+    .pressure-item b { color: var(--orange); font-size: 21px; }
+    .pressure-item h3 { font-size: 17px; }
+    .pressure-item p { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.48; }
+    .valuation { margin-top: auto; display: grid; gap: 9px; }
+    .price { color: var(--orange); font-size: 65px; font-weight: 800; letter-spacing: -.08em; line-height: .95; }
+    .price small { margin-left: 7px; color: var(--ink); font-size: 18px; letter-spacing: -.02em; }
+    .page--ink .price small { color: #fff; }
+    .compare { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.24); border-bottom: 1px solid rgba(255,255,255,.24); }
+    .compare div { padding: 14px 8px; border-right: 1px solid rgba(255,255,255,.24); }
+    .compare div:last-child { border-right: 0; }
+    .compare span { display: block; color: rgba(255,255,255,.62); font-size: 11px; }
+    .compare b { display: block; margin-top: 6px; font-size: 21px; letter-spacing: -.05em; }
+    .cash { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; margin-top: auto; align-items: end; }
+    .cash-number { color: var(--orange); font-size: 55px; font-weight: 800; line-height: .9; letter-spacing: -.08em; }
+    .cash-number span { margin-left: 5px; color: var(--ink); font-size: 17px; letter-spacing: -.02em; }
+    .cash-copy { color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .r-and-d { padding: 15px; border: 1px solid var(--line); }
+    .r-and-d b { font-size: 29px; letter-spacing: -.05em; }
+    .r-and-d p { margin-top: 7px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .risk-list { display: grid; gap: 13px; margin-top: auto; }
+    .risk { padding: 15px 0; border-top: 1px solid var(--line); }
+    .risk .level { color: var(--risk); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+    .risk h3 { margin-top: 5px; font-size: 18px; }
+    .risk p { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .watch-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; margin-top: auto; }
+    .watch { min-height: 142px; padding: 15px; border: 1px solid var(--line); background: #fff; }
+    .watch b { color: var(--orange); font-size: 13px; }
+    .watch h3 { margin-top: 20px; font-size: 16px; }
+    .watch p { margin-top: 7px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .closing { margin-top: auto; padding: 26px 0; border-top: 1px solid rgba(255,255,255,.28); border-bottom: 1px solid rgba(255,255,255,.28); font-size: 29px; font-weight: 800; line-height: 1.25; letter-spacing: -.055em; }
+    .closing small { display: block; margin-top: 18px; color: rgba(255,255,255,.67); font-size: 13px; font-weight: 500; line-height: 1.6; letter-spacing: 0; }
+    .controls { display: flex; justify-content: center; gap: 10px; margin-top: 17px; }
+    button { min-width: 76px; min-height: 38px; border: 1px solid rgba(255,255,255,.34); color: #fff; background: transparent; cursor: pointer; font: inherit; font-size: 13px; }
+    button:hover, button:focus-visible { border-color: var(--orange); background: var(--orange); outline: none; }
+    .dots { display: flex; align-items: center; gap: 5px; }
+    .dot { width: 5px; height: 5px; border-radius: 50%; background: #6c6c6c; }
+    .dot.active { width: 17px; border-radius: 8px; background: var(--orange); }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+  <main class="viewer" aria-label="小米集团小红书轮播稿 v0">
+    <section class="carousel" aria-live="polite">
+      <article class="page page--ink active" data-screen-label="01 封面">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">01 / 10</span></div>
+        <p class="kicker">01810.HK · 深度研究摘要</p>
+        <h1>小米：<br><span class="orange">业绩筑底</span>，<br>估值先跌</h1>
+        <p class="lead">人车家全生态的稀缺性，正在与 2026 年的业绩低谷拉锯。</p>
+        <div class="cover-visual">[ 官方媒体图 ]<br>YU7 / SU7<br>待补</div>
+        <span class="cover-word">XIAOMI</span>
+        <div class="meta"><span>数据截止 2026 Q1</span><span>市场数据 2026.07.15</span><span>仅作研究交流</span></div>
+      </article>
+
+      <article class="page" data-screen-label="02 业务结构">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">02 / 10</span></div>
+        <p class="kicker">先看今天的小米</p>
+        <h2>手机不再是<br>唯一叙事</h2>
+        <p class="lead">2025 年营收 4,573 亿元，同比增长 25.0%。四块业务，四种经济性。</p>
+        <div class="business-grid">
+          <div class="metric"><b class="number">40.8%</b><p>智能手机<br>1,864 亿元收入</p><small>毛利率 10.9%</small></div>
+          <div class="metric"><b class="number">26.9%</b><p>IoT 与生活消费<br>1,232 亿元收入</p><small>毛利率 23.1%</small></div>
+          <div class="metric"><b class="number">8.2%</b><p>互联网服务<br>374 亿元收入</p><small>毛利率 76.5%</small></div>
+          <div class="metric metric--accent"><b class="number">23.2%</b><p>汽车及 AI 等创新<br>1,061 亿元收入</p><small>毛利率 24.3%</small></div>
+        </div>
+      </article>
+
+      <article class="page" data-screen-label="03 利润引擎">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">03 / 10</span></div>
+        <p class="kicker">真正的利润结构</p>
+        <h2>低毛利硬件，<br><span class="orange">高毛利服务</span>压舱</h2>
+        <p class="lead">手机带来入口，IoT 扩张生态，互联网服务负责把流量变成利润。</p>
+        <div class="ladder">
+          <div class="ladder-row"><span>互联网</span><div class="bar"><span style="width:100%"></span></div><b>76.5%</b></div>
+          <div class="ladder-row"><span>汽车</span><div class="bar"><span style="width:32%"></span></div><b>24.3%</b></div>
+          <div class="ladder-row"><span>IoT</span><div class="bar"><span style="width:30%"></span></div><b>23.1%</b></div>
+          <div class="ladder-row"><span>手机</span><div class="bar bar--ink"><span style="width:14%"></span></div><b>10.9%</b></div>
+        </div>
+        <p class="fact">核心不是“手机卖得多”，而是高毛利服务能否随着设备与用户规模持续放大。</p>
+      </article>
+
+      <article class="page" data-screen-label="04 护城河">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">04 / 10</span></div>
+        <p class="kicker">长期价值来自协同</p>
+        <h2>“人车家”<br>到底强在哪？</h2>
+        <p class="lead">设备规模、系统连接与服务变现构成闭环；但协同的财务贡献仍处于验证期。</p>
+        <div class="ecosystem">
+          <div class="eco"><strong>8.2 亿</strong><p>澎湃 OS 连接设备</p></div>
+          <div class="eco"><strong>10.79 亿</strong><p>AIoT 平台连接设备</p></div>
+          <div class="eco"><strong>7.54 亿</strong><p>月活用户生态底盘</p></div>
+          <div class="eco"><strong>135 亿</strong><p>玄戒芯片累计投入</p></div>
+        </div>
+      </article>
+
+      <article class="page" data-screen-label="05 短期压力">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">05 / 10</span></div>
+        <p class="kicker">2026 年的关键矛盾</p>
+        <h2>业绩为什么<br>进入低谷？</h2>
+        <p class="lead">三股力量在同一时点压缩了利润。</p>
+        <div class="pressure">
+          <div class="pressure-item"><b>01</b><div><h3>存储涨价</h3><p>手机毛利率从 2024 年 12.6% 降至 2025 年 10.9%。</p></div></div>
+          <div class="pressure-item"><b>02</b><div><h3>车型换代断档</h3><p>汽车业务 2026Q1 再亏 31 亿元，分部毛利率降至 20.1%。</p></div></div>
+          <div class="pressure-item"><b>03</b><div><h3>研发与销售投入</h3><p>研发开支同比 +33.4%，短期投入正在挤压利润。</p></div></div>
+        </div>
+      </article>
+
+      <article class="page page--ink" data-screen-label="06 估值">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">06 / 10</span></div>
+        <p class="kicker">市场已经先跌一步</p>
+        <h2>问题不只是<br>“贵不贵”</h2>
+        <div class="valuation">
+          <div class="price">25.86<small>HK$</small></div>
+          <p class="lead">截至 2026.07.15，市场正在为“业绩底 + 长期低迷”预先定价。</p>
+          <div class="compare"><div><span>距 2025 高点</span><b class="orange">-58%</b></div><div><span>PE-TTM</span><b>16.7×</b></div><div><span>5 年分位</span><b>0.82%</b></div></div>
+        </div>
+        <span class="v0-note">v0：此页会在正式稿补入“估值已先跌”的简图。</span>
+      </article>
+
+      <article class="page" data-screen-label="07 安全垫">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">07 / 10</span></div>
+        <p class="kicker">但它也不是脆弱的公司</p>
+        <h2>短期承压，<br>底子仍厚</h2>
+        <p class="lead">现金与研发是小米穿越汽车投入期、芯片周期与竞争加剧的两层缓冲。</p>
+        <div class="cash"><div><div class="cash-number">2,326<span>亿元</span></div><p class="cash-copy">广义现金资源，显著高于 361 亿元有息负债。</p></div><div class="r-and-d"><b>331 亿</b><p>2025 年研发投入<br>五年累计 1,055 亿</p></div></div>
+        <div class="signal"><span class="kicker">不是无风险</span><p>安全垫解决流动性问题，不能替代对手机毛利率与汽车盈利的验证。</p></div>
+      </article>
+
+      <article class="page" data-screen-label="08 风险">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">08 / 10</span></div>
+        <p class="kicker">风险不止在短期利润</p>
+        <h2>真正要防的是<br><span class="orange">长期平庸化</span></h2>
+        <div class="risk-list">
+          <div class="risk"><span class="level">高风险</span><h3>汽车盈利反复</h3><p>成本、补贴与车型换代可能让规模增长不再转化为利润。</p></div>
+          <div class="risk"><span class="level">高风险</span><h3>手机无定价权</h3><p>存储成本上行时，低毛利硬件最先承压。</p></div>
+          <div class="risk"><span class="level">高风险</span><h3>华为系竞争</h3><p>产品矩阵仍较单一，20–30 万元核心区间竞争加剧。</p></div>
+        </div>
+      </article>
+
+      <article class="page" data-screen-label="09 跟踪清单">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">09 / 10</span></div>
+        <p class="kicker">下一次财报，看这四个数</p>
+        <h2>别只盯股价</h2>
+        <p class="lead">判断“业绩底”是否形成，需要连续季度的数据确认。</p>
+        <div class="watch-list">
+          <div class="watch"><b>01</b><h3>手机毛利率</h3><p>能否重新站上 10%</p></div>
+          <div class="watch"><b>02</b><h3>汽车毛利率</h3><p>能否回升至 24%+</p></div>
+          <div class="watch"><b>03</b><h3>YU7 月销</h3><p>能否稳定在 2 万辆+</p></div>
+          <div class="watch"><b>04</b><h3>全年交付</h3><p>55 万辆目标进度</p></div>
+        </div>
+      </article>
+
+      <article class="page page--ink" data-screen-label="10 结语">
+        <div class="topline"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"><span class="page-no">10 / 10</span></div>
+        <p class="kicker">研究结论</p>
+        <h2>一家公司，<br>两条叙事</h2>
+        <div class="closing">长期：人车家生态的稀缺性。<br><span class="orange">短期：业绩底仍待确认。</span><small>这不是简单的看多或看空，而是一份需要持续验证的跟踪清单。</small></div>
+        <div class="meta"><span>资料：小米深度研究报告</span><span>数据截至 2026Q1</span><span>非投资建议</span></div>
+      </article>
+    </section>
+    <nav class="controls" aria-label="轮播控制"><button type="button" id="previous">上一张</button><div class="dots" id="dots" aria-hidden="true"></div><button type="button" id="next">下一张</button></nav>
+  </main>
+  <script>
+    const pages = [...document.querySelectorAll('.page')];
+    const dots = document.getElementById('dots');
+    let current = 0;
+    pages.forEach((_, index) => { const dot = document.createElement('span'); dot.className = 'dot'; dots.append(dot); });
+    const showPage = (index) => {
+      current = (index + pages.length) % pages.length;
+      pages.forEach((page, pageIndex) => page.classList.toggle('active', pageIndex === current));
+      [...dots.children].forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === current));
+    };
+    document.getElementById('previous').addEventListener('click', () => showPage(current - 1));
+    document.getElementById('next').addEventListener('click', () => showPage(current + 1));
+    window.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') showPage(current - 1); if (event.key === 'ArrowRight' || event.key === ' ') { event.preventDefault(); showPage(current + 1); } });
+    showPage(0);
+  </script>
+</body>
+</html>
