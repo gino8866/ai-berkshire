@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小米集团｜深度投资研究演播稿</title>
+  <style>
+    :root {
+      --orange: #ff6900;
+      --ink: #191919;
+      --muted: #6b6b6b;
+      --paper: #f7f6f3;
+      --line: #dedbd5;
+      --red: #b42318;
+      --green: #147a58;
+      --cream: #fff5eb;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      color: var(--ink);
+      background: #101010;
+      font-family: MiSans, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .stage {
+      width: 1920px;
+      height: 1080px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      overflow: hidden;
+      padding: 72px 92px 70px;
+      background: var(--paper);
+      flex-direction: column;
+    }
+    .slide.active { display: flex; }
+    .slide::after {
+      content: "";
+      position: absolute;
+      right: -140px;
+      bottom: -160px;
+      width: 520px;
+      height: 520px;
+      border: 1px solid rgba(255, 105, 0, .22);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .slide--dark { background: var(--ink); color: #fff; }
+    .slide--dark::after { border-color: rgba(255, 105, 0, .65); }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--orange);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 32px; height: 3px; background: currentColor; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .logo { width: 190px; height: auto; }
+    .page-label { font-size: 18px; color: var(--muted); letter-spacing: .12em; }
+    .slide--dark .page-label { color: #a8a8a8; }
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      max-width: 1220px;
+      margin-top: 100px;
+      font-size: 94px;
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -.055em;
+      text-wrap: pretty;
+    }
+    h2 {
+      max-width: 1380px;
+      margin-top: 34px;
+      font-size: 62px;
+      font-weight: 800;
+      line-height: 1.14;
+      letter-spacing: -.04em;
+      text-wrap: pretty;
+    }
+    .subhead { margin-top: 22px; max-width: 890px; color: var(--muted); font-size: 26px; line-height: 1.55; }
+    .slide--dark .subhead { color: #bcbcbc; }
+    .orange { color: var(--orange); }
+    .content { flex: 1; display: flex; align-items: center; min-height: 0; }
+    .title-meta { display: flex; gap: 46px; margin-top: auto; font-size: 22px; color: #c8c8c8; }
+    .title-meta strong { color: #fff; }
+    .hero-word {
+      position: absolute;
+      right: 78px;
+      bottom: 20px;
+      color: rgba(255,255,255,.06);
+      font-size: 242px;
+      font-weight: 800;
+      letter-spacing: -.1em;
+      user-select: none;
+    }
+    .thesis { display: grid; grid-template-columns: 1.35fr .65fr; gap: 72px; width: 100%; }
+    .thesis-main { font-size: 42px; line-height: 1.45; font-weight: 650; letter-spacing: -.025em; }
+    .thesis-main b { color: var(--orange); }
+    .thesis-side { border-left: 2px solid var(--orange); padding: 6px 0 6px 34px; }
+    .thesis-side dt { color: var(--muted); font-size: 18px; letter-spacing: .08em; }
+    .thesis-side dd { margin: 12px 0 36px; font-size: 30px; font-weight: 750; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; width: 100%; }
+    .metric { min-height: 260px; padding: 28px; border: 1px solid var(--line); background: #fff; display: flex; flex-direction: column; justify-content: space-between; }
+    .metric .number { font-size: 58px; font-weight: 800; letter-spacing: -.05em; }
+    .metric .label { color: var(--muted); font-size: 20px; line-height: 1.4; }
+    .metric .note { font-size: 18px; color: var(--green); }
+    .metric--accent { background: var(--orange); border-color: var(--orange); color: #fff; }
+    .metric--accent .label, .metric--accent .note { color: rgba(255,255,255,.78); }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; width: 100%; }
+    .panel { padding: 34px; border-top: 4px solid var(--ink); background: #fff; }
+    .panel--orange { border-top-color: var(--orange); background: var(--cream); }
+    .panel h3 { margin-bottom: 24px; font-size: 27px; }
+    .panel ul { margin: 0; padding-left: 24px; font-size: 25px; line-height: 1.75; }
+    .panel li + li { margin-top: 12px; }
+    .margin-ladder { display: grid; gap: 16px; width: 100%; }
+    .margin-row { display: grid; grid-template-columns: 230px 1fr 150px; gap: 22px; align-items: center; font-size: 25px; }
+    .bar { height: 40px; background: #ddd8d0; overflow: hidden; }
+    .bar span { display: block; height: 100%; background: var(--orange); }
+    .bar--dark span { background: var(--ink); }
+    .margin-row strong { text-align: right; font-size: 29px; }
+    .timeline { display: grid; grid-template-columns: repeat(5, 1fr); width: 100%; gap: 0; }
+    .time-step { min-height: 340px; padding: 0 22px 0 0; border-top: 3px solid var(--line); position: relative; }
+    .time-step::before { content: ""; position: absolute; top: -9px; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--orange); }
+    .time-step time { display: block; margin-top: 36px; color: var(--orange); font-size: 22px; font-weight: 750; }
+    .time-step h3 { margin-top: 14px; font-size: 31px; line-height: 1.25; }
+    .time-step p { margin-top: 16px; color: var(--muted); font-size: 21px; line-height: 1.55; }
+    .table { width: 100%; border-collapse: collapse; font-size: 25px; }
+    .table th, .table td { padding: 18px 20px; border-bottom: 1px solid var(--line); text-align: right; }
+    .table th:first-child, .table td:first-child { text-align: left; }
+    .table th { color: var(--muted); font-weight: 600; font-size: 19px; letter-spacing: .05em; }
+    .table .highlight td { color: var(--orange); font-weight: 800; background: var(--cream); }
+    .scenario { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
+    .scenario-card { padding: 28px; background: #fff; border: 1px solid var(--line); }
+    .scenario-card h3 { font-size: 24px; }
+    .scenario-card .price { margin: 46px 0 12px; font-size: 72px; font-weight: 800; letter-spacing: -.06em; }
+    .scenario-card p { color: var(--muted); font-size: 21px; line-height: 1.55; }
+    .scenario-card--base { background: var(--orange); border-color: var(--orange); color: #fff; }
+    .scenario-card--base p { color: rgba(255,255,255,.83); }
+    .risk-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 40px; width: 100%; }
+    .risk { display: grid; grid-template-columns: 116px 1fr; gap: 22px; padding: 22px 0; border-top: 1px solid var(--line); }
+    .risk .level { color: var(--red); font-size: 18px; font-weight: 800; letter-spacing: .08em; }
+    .risk h3 { font-size: 27px; }
+    .risk p { margin-top: 8px; color: var(--muted); font-size: 20px; line-height: 1.5; }
+    .watch-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; width: 100%; }
+    .watch { min-height: 220px; padding: 28px; background: #fff; border: 1px solid var(--line); }
+    .watch .order { color: var(--orange); font-size: 20px; font-weight: 800; }
+    .watch h3 { margin-top: 42px; font-size: 27px; }
+    .watch p { margin-top: 12px; color: var(--muted); font-size: 19px; line-height: 1.45; }
+    .conclusion { display: grid; grid-template-columns: 1.2fr .8fr; gap: 70px; width: 100%; }
+    .verdict { font-size: 54px; font-weight: 800; line-height: 1.22; letter-spacing: -.04em; }
+    .verdict b { color: var(--orange); }
+    .action-box { padding: 38px; border: 1px solid rgba(255,255,255,.27); }
+    .action-box h3 { color: var(--orange); font-size: 20px; letter-spacing: .1em; }
+    .action-box p { margin-top: 24px; font-size: 31px; font-weight: 700; line-height: 1.42; }
+    .source { margin-top: auto; color: var(--muted); font-size: 16px; line-height: 1.45; }
+    .slide--dark .source { color: #939393; }
+    .notes {
+      position: fixed;
+      left: 50%;
+      bottom: 76px;
+      width: min(860px, calc(100vw - 48px));
+      transform: translateX(-50%);
+      z-index: 4;
+      display: none;
+      padding: 18px 22px;
+      border-left: 4px solid var(--orange);
+      color: #f7f6f3;
+      background: rgba(20,20,20,.94);
+      font-size: 15px;
+      line-height: 1.55;
+      box-shadow: 0 16px 50px rgba(0,0,0,.25);
+    }
+    .notes.visible { display: block; }
+    .controls { position: fixed; left: 24px; bottom: 20px; z-index: 5; display: flex; gap: 10px; }
+    button { min-width: 44px; min-height: 38px; border: 1px solid rgba(255,255,255,.25); color: #fff; background: rgba(255,255,255,.12); cursor: pointer; font: inherit; }
+    button:hover, button:focus-visible { border-color: var(--orange); background: var(--orange); outline: none; }
+    .counter { position: fixed; right: 24px; bottom: 26px; z-index: 5; color: rgba(255,255,255,.72); font-size: 14px; letter-spacing: .08em; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+  <main class="stage" aria-label="小米集团深度投资研究演播稿">
+    <section class="slide slide--dark" data-screen-label="01 Cover" data-note="各位好，今天汇报小米集团的深度投资研究。先给结论：小米是一家基本面短期承压、但估值已先行修复的生态型公司。今天我们重点回答三个问题：生态是否真实、业绩底何时确认、以及当前价格是否留下足够安全边际。">
+      <div class="header"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="Xiaomi"><span class="page-label">01 / 12</span></div>
+      <div class="eyebrow">Investment research · 2026.07</div>
+      <h1>小米集团<br><span class="orange">业绩筑底</span>，估值先跌</h1>
+      <p class="subhead">01810.HK｜人车家全生态的稀缺性，与 2026 年业绩低谷的拉锯。</p>
+      <div class="title-meta"><span>数据截止：<strong>2026 Q1</strong></span><span>市场数据：<strong>2026.07.15</strong></span><span>内部研究讨论，非投资建议</span></div>
+      <div class="hero-word">XIAOMI</div>
+    </section>
+
+    <section class="slide" data-screen-label="02 Thesis" data-note="核心判断不是简单的看多或看空。小米最有价值的是人、车、家和互联网服务的组合；但短期利润被手机成本、汽车换代和研发投入三重压力挤压。市场已将这种压力反映在约 16.7 倍 TTM 经调整 PE 中，因此关键从估值高低转向业绩拐点验证。">
+      <div class="header"><div class="eyebrow">Core thesis</div><span class="page-label">02 / 12</span></div>
+      <h2>好公司，可能是好价格；<br>但还不是一个<span class="orange">无条件的买点</span></h2>
+      <div class="content"><div class="thesis">
+        <p class="thesis-main">生态、汽车和高毛利服务构成长期价值；但 2026 年的短期利润正在被<b>成本上行、车型换代与费用投入</b>共同压制。</p>
+        <dl class="thesis-side"><dt>研究结论</dt><dd>纳入核心跟踪池</dd><dt>行动原则</dt><dd>分批，而非一次性押注</dd><dt>确认条件</dt><dd>手机毛利率 + 汽车毛利率 + 交付</dd></dl>
+      </div></div>
+      <p class="source">资料：小米深度投资研究报告，2026-07-16。</p>
+    </section>
+
+    <section class="slide" data-screen-label="03 Revenue mix" data-note="先看小米今天的结构。手机不再是唯一叙事：2025 年，智能汽车及 AI 创新业务收入达到 1,061 亿元，占比超过五分之一；IoT 和互联网服务则分别提供规模和利润。真正值得注意的不是收入占比，而是利润结构发生了变化。">
+      <div class="header"><div class="eyebrow">Business mix</div><span class="page-label">03 / 12</span></div>
+      <h2>四块业务，四种经济性</h2><p class="subhead">2025 年营收 4,573 亿元，同比增长 25.0%。</p>
+      <div class="content"><div class="grid-4">
+        <article class="metric"><span class="number">40.8%</span><span class="label">智能手机<br>收入 1,864 亿元</span><span class="note">毛利率 10.9%</span></article>
+        <article class="metric"><span class="number">26.9%</span><span class="label">IoT 与生活消费<br>收入 1,232 亿元</span><span class="note">毛利率 23.1%</span></article>
+        <article class="metric"><span class="number">8.2%</span><span class="label">互联网服务<br>收入 374 亿元</span><span class="note">毛利率 76.5%</span></article>
+        <article class="metric metric--accent"><span class="number">23.2%</span><span class="label">智能汽车及 AI<br>收入 1,061 亿元</span><span class="note">毛利率 24.3%</span></article>
+      </div></div>
+      <p class="source">资料：小米 2025 年报；各项毛利率为报告整理口径。</p>
+    </section>
+
+    <section class="slide" data-screen-label="04 Moat" data-note="护城河不能只讲规模，也要讲裂缝。第一层是人车家生态，第二层是供应链效率，第三层是互联网服务变现，第四层是芯片和 AI。相应地，手机没有苹果式定价权，汽车产品仍偏单一，芯片和 AI 还没有被商业化验证。">
+      <div class="header"><div class="eyebrow">Moat &amp; cracks</div><span class="page-label">04 / 12</span></div>
+      <h2>生态是真实的，但协同尚未完全兑现</h2>
+      <div class="content"><div class="split">
+        <article class="panel panel--orange"><h3>护城河</h3><ul><li>HyperOS 连接多终端，AIoT 平台连接设备 10.79 亿台。</li><li>低毛利硬件换规模，高毛利互联网服务兑现流量价值。</li><li>汽车、IoT 与芯片投入，扩大生态入口与边界。</li></ul></article>
+        <article class="panel"><h3>尚未解决的裂缝</h3><ul><li>手机毛利率低，对存储周期高度敏感。</li><li>汽车仍依赖 SU7、YU7 两大系列，竞争正在加剧。</li><li>人车家交叉变现仍以叙事为主，财务协同待验证。</li></ul></article>
+      </div></div>
+      <p class="source">资料：小米深度投资研究报告；生态规模与观点需通过后续季度披露持续验证。</p>
+    </section>
+
+    <section class="slide" data-screen-label="05 Financial quality" data-note="财务质量的核心是两面性。正面是营收、经调整利润和整体毛利率持续提升，资产负债表是净现金；反面是 2025 年报告利润中有投资公允价值变动收益，而且经营现金流与净利润之比降至 0.82。我们更应以经调整利润 392 亿元作为经营基准。">
+      <div class="header"><div class="eyebrow">Financial quality</div><span class="page-label">05 / 12</span></div>
+      <h2>底子很厚，但利润质量需要更严格地看</h2>
+      <div class="content"><div class="split">
+        <div class="panel"><h3>经营基准：经调整净利</h3><table class="table"><thead><tr><th>年度</th><th>营收（亿元）</th><th>经调整净利（亿元）</th><th>毛利率</th></tr></thead><tbody><tr><td>2023</td><td>2,710</td><td>193</td><td>21.2%</td></tr><tr><td>2024</td><td>3,659</td><td>272</td><td>20.9%</td></tr><tr class="highlight"><td>2025</td><td>4,573</td><td>392</td><td>22.3%</td></tr></tbody></table></div>
+        <div class="panel panel--orange"><h3>不能忽略的两点</h3><ul><li>2025 年归母净利 416 亿元含约 133 亿元一次性公允价值收益。</li><li>经营现金流 / 净利润降至 0.82，主要受汽车备货推高存货影响。</li><li>广义现金资源 2,326 亿元，构成汽车与 AI 长投入的安全垫。</li></ul></div>
+      </div></div>
+      <p class="source">资料：小米 2021–2025 年报；部分数据为报告手算及交叉验证口径。</p>
+    </section>
+
+    <section class="slide" data-screen-label="06 Margin pressure" data-note="2026 年的压力集中在这里。手机方面，存储涨价侵蚀毛利率；汽车方面，新旧车型切换导致 Q1 亏损；费用方面，研发和销售继续增加。因而短期不能把 2025 年的利润趋势简单线性外推。">
+      <div class="header"><div class="eyebrow">2026 trough</div><span class="page-label">06 / 12</span></div>
+      <h2>业绩低谷的三重来源</h2>
+      <div class="content"><div class="margin-ladder">
+        <div class="margin-row"><span>手机毛利率</span><div class="bar"><span style="width: 67%"></span></div><strong>10.9%</strong></div>
+        <div class="margin-row"><span>汽车毛利率</span><div class="bar"><span style="width: 100%"></span></div><strong>24.3%</strong></div>
+        <div class="margin-row"><span>2026 Q1 汽车毛利率</span><div class="bar bar--dark"><span style="width: 83%"></span></div><strong>20.1%</strong></div>
+      </div></div>
+      <div class="split"><div class="panel"><h3>手机：外生成本压力</h3><p class="subhead">存储价格上行，挤压硬件利润；高端化与 ASP 上升只能部分对冲。</p></div><div class="panel"><h3>汽车：换代期扰动</h3><p class="subhead">新旧 SU7 切换与关键部件成本，使汽车业务在 2026 Q1 再度亏损。</p></div></div>
+      <p class="source">资料：小米深度投资研究报告。图示为报告期数值对比，不代表未来趋势。</p>
+    </section>
+
+    <section class="slide" data-screen-label="07 Growth engines" data-note="长期增长引擎有五个，但确定性不同。汽车弹性最大，也最难预测；手机高端化和 IoT 出海的确定性更高；互联网服务继续是高利润压舱石；芯片与 AI 的价值主要仍在远期。这也是为什么小米不能只用传统硬件公司的框架来估值。">
+      <div class="header"><div class="eyebrow">Growth engines</div><span class="page-label">07 / 12</span></div>
+      <h2>增长不只来自汽车，但汽车决定弹性</h2>
+      <div class="content"><div class="timeline">
+        <article class="time-step"><time>01</time><h3>汽车放量</h3><p>产品矩阵扩展、产能释放；但 55 万辆年度目标存在执行压力。</p></article>
+        <article class="time-step"><time>02</time><h3>手机高端化</h3><p>ASP 已处历史高位，增量重点从份额转向价格与海外结构。</p></article>
+        <article class="time-step"><time>03</time><h3>IoT 出海</h3><p>海外大家电与可穿戴业务，为稳健增长提供第二曲线。</p></article>
+        <article class="time-step"><time>04</time><h3>互联网服务</h3><p>高毛利率与海外收入占比提升，是利润的稳定器。</p></article>
+        <article class="time-step"><time>05</time><h3>芯片与 AI</h3><p>玄戒、HyperOS、MiMo 是远期选择权，尚未形成盈利验证。</p></article>
+      </div></div>
+      <p class="source">资料：小米深度投资研究报告。增长驱动按确定性与弹性综合排序。</p>
+    </section>
+
+    <section class="slide" data-screen-label="08 Valuation" data-note="估值是本案最吸引人的部分。报告以 7 月 15 日股价计算，TTM 经调整 PE 为 16.7 倍，2025 经调整 PE 为 14.7 倍，并处于五年极低分位。它不意味着不会跌，而是说明市场对增长放缓已经做了非常悲观的定价。">
+      <div class="header"><div class="eyebrow">Valuation</div><span class="page-label">08 / 12</span></div>
+      <h2>市场已经先为“业绩底”付了价格</h2>
+      <div class="content"><div class="grid-4">
+        <article class="metric metric--accent"><span class="number">HK$25.86</span><span class="label">股价<br>截至 2026.07.15</span><span class="note">较高点约 -58%</span></article>
+        <article class="metric"><span class="number">16.7×</span><span class="label">PE-TTM<br>经调整口径</span><span class="note">主估值指标</span></article>
+        <article class="metric"><span class="number">14.7×</span><span class="label">2025 PE<br>经调整口径</span><span class="note">EPS 1.759 港元</span></article>
+        <article class="metric"><span class="number">0.82%</span><span class="label">五年 PE 分位</span><span class="note">报告测算极低分位</span></article>
+      </div></div>
+      <p class="source">资料：小米深度投资研究报告；估值为特定日期快照，非实时行情或收益承诺。</p>
+    </section>
+
+    <section class="slide" data-screen-label="09 Scenarios" data-note="三情景告诉我们，收益不来自于再给很高的估值，而是来自业绩恢复和估值回到合理中枢。中性假设是八个百分点的年增长与十八倍 PE，对应约 39.9 港元；乐观情景需要汽车和手机双双兑现；悲观情景仍假设利润没有进一步恶化。">
+      <div class="header"><div class="eyebrow">Three scenarios · 2028E</div><span class="page-label">09 / 12</span></div>
+      <h2>赔率存在，但取决于“底”能否被确认</h2>
+      <div class="content"><div class="scenario">
+        <article class="scenario-card"><h3>悲观</h3><div class="price">HK$26.1</div><p>净利年增速 2%<br>目标 PE 14×<br>较当前 +1.1%</p></article>
+        <article class="scenario-card scenario-card--base"><h3>中性</h3><div class="price">HK$39.9</div><p>净利年增速 8%<br>目标 PE 18×<br>较当前 +54.2%</p></article>
+        <article class="scenario-card"><h3>乐观</h3><div class="price">HK$58.9</div><p>净利年增速 15%<br>目标 PE 22×<br>较当前 +127.6%</p></article>
+      </div></div>
+      <p class="source">资料：小米深度投资研究报告；情景测算基于假设，并非目标价建议。</p>
+    </section>
+
+    <section class="slide" data-screen-label="10 Risks" data-note="风险不能被低估。短期最大的风险是汽车盈利持续性和手机毛利率继续下探；中期是华为系竞争、车型单一与地缘风险；更本质的风险是小米被市场长期重估为低增长硬件公司。也就是说，最大的下行并不是一次暴跌，而是估值长期不修复。">
+      <div class="header"><div class="eyebrow">Risk map</div><span class="page-label">10 / 12</span></div>
+      <h2>真正的风险：不是“贵”，而是长期平庸化</h2>
+      <div class="content"><div class="risk-list">
+        <article class="risk"><span class="level">HIGH</span><div><h3>汽车盈利反复</h3><p>车型切换、零部件成本与竞争，可能使毛利率难回 24%+。</p></div></article>
+        <article class="risk"><span class="level">HIGH</span><div><h3>手机毛利率危机</h3><p>存储上行时，低毛利硬件业务缺少足够定价权缓冲。</p></div></article>
+        <article class="risk"><span class="level">HIGH</span><div><h3>华为系围堵</h3><p>主力价位出现直接竞品，产品矩阵单一问题会被放大。</p></div></article>
+        <article class="risk"><span class="level">MEDIUM–HIGH</span><div><h3>地缘与海外不确定性</h3><p>印度资产、欧洲合规与关税，都可能抬升出海成本。</p></div></article>
+      </div></div>
+      <p class="source">资料：小米深度投资研究报告。风险等级为研究判断，需结合季度信息更新。</p>
+    </section>
+
+    <section class="slide" data-screen-label="11 Watchlist" data-note="下一步不是继续讨论宏大叙事，而是建立可证伪的跟踪表。第一看手机毛利率能否守住十个百分点，第二看 YU7 月销和订单，第三看汽车毛利率能否重回二十四个百分点以上，第四看 55 万辆交付进度。它们共同决定 2026 Q2 到 Q3 是否是业绩底。">
+      <div class="header"><div class="eyebrow">Catalysts &amp; monitoring</div><span class="page-label">11 / 12</span></div>
+      <h2>用四个指标确认，而不是用情绪下注</h2>
+      <div class="content"><div class="watch-list">
+        <article class="watch"><span class="order">01</span><h3>手机毛利率</h3><p>企稳 10% 以上；若低于 8.5%，成本压力未解。</p></article>
+        <article class="watch"><span class="order">02</span><h3>YU7 月销与订单</h3><p>观察能否稳定 2 万辆以上，及交付周期变化。</p></article>
+        <article class="watch"><span class="order">03</span><h3>汽车毛利率</h3><p>从 2026 Q1 的 20.1%，回升至 24%+。</p></article>
+        <article class="watch"><span class="order">04</span><h3>年度交付进度</h3><p>55 万辆目标要求下半年月均约 5.4 万辆。</p></article>
+      </div></div>
+      <p class="source">资料：小米深度投资研究报告。四项指标构成 2026 年“业绩底确认”的最小观察集。</p>
+    </section>
+
+    <section class="slide slide--dark" data-screen-label="12 Conclusion" data-note="最后总结。小米值得长期跟踪，当前估值已出现安全边际；但买入逻辑必须建立在业绩确认上，而非单纯因为股价下跌。最合适的策略是分批、设定跟踪条件，并在 Q2、Q3 的手机毛利率、汽车毛利率和交付数据中验证我们的判断。">
+      <div class="header"><img class="logo" src="assets/xiaomi-brand/xiaomi-logo.svg" alt="Xiaomi"><span class="page-label">12 / 12</span></div>
+      <div class="eyebrow">Conclusion</div>
+      <h2>核心结论：<span class="orange">值得跟踪</span>，<br>等待业绩底确认</h2>
+      <div class="content"><div class="conclusion"><p class="verdict">这是“<b>好生意</b> + 可能是好价格 + 短期业绩探底”的组合。</p><div class="action-box"><h3>行动框架</h3><p>纳入核心跟踪池<br>分批建仓，而非重仓押注<br>以 Q2 / Q3 数据验证拐点</p></div></div></div>
+      <p class="source">研究来源：小米-deep-research-20260716.md。内部交流材料，不构成投资建议。</p>
+    </section>
+  </main>
+
+  <aside class="notes" aria-live="polite"></aside>
+  <nav class="controls" aria-label="演示控制"><button type="button" id="prev" aria-label="上一页">←</button><button type="button" id="toggle-notes" aria-label="显示或隐藏口播稿">讲稿</button><button type="button" id="next" aria-label="下一页">→</button></nav>
+  <div class="counter" aria-live="polite"></div>
+  <script>
+    const stage = document.querySelector('.stage');
+    const slides = [...document.querySelectorAll('.slide')];
+    const notes = document.querySelector('.notes');
+    const counter = document.querySelector('.counter');
+    let current = Number.parseInt(localStorage.getItem('xiaomi-deck-v0-slide') || '0', 10);
+    let notesVisible = false;
+    const speakerNotes = [
+      '先说结论：小米现在不是“完美公司”，但可能正处在一个很值得盯住的阶段。别只把它当手机公司。今天的小米，手机只是基本盘；IoT、互联网服务、汽车，再加上芯片和 AI，才是它真正想讲的故事。这期我们就回答三件事：小米的生态到底有没有用？2026 年业绩为什么突然承压？股价从高点回落这么多以后，现在到底是机会，还是陷阱？',
+      '我们的判断很简单：小米是好公司，也可能是好价格，但暂时还不能闭眼买。长期逻辑没变：生态、汽车、高毛利互联网服务都在往前走。问题是短期利润被内存涨价、汽车换代和研发销售投入卡住了。市场已经先把这些担心反映进股价。接下来别只看涨跌，重点看手机毛利率、汽车毛利率和汽车交付量。它们一好转，业绩底就更可信。',
+      '先看小米靠什么赚钱。2025 年，小米营收 4,573 亿元，增长 25%。手机还是最大块，但它并不最赚钱，毛利率只有 10.9%。真正值得注意的是另外两块：互联网服务只占收入 8.2%，但毛利率高达 76.5%，很像一个隐藏的利润发动机。汽车收入已经破千亿，占比超过五分之一，毛利率也有 24.3%。现在看小米，不能只盯手机销量。',
+      '那小米的护城河是什么？一句话，人、车、家连起来以后，用户就更难离开。手机、手表、空调、电视、汽车，都能放进同一套系统里。小米又很会控制成本，用性价比把用户拉进来；用户多了，再靠广告、游戏和增值服务赚钱。但别把这个故事想得太完美：小米手机没有苹果那种定价权，汽车还主要靠 SU7 和 YU7，人车家之间到底能赚多少钱，现在也没完全证明。',
+      '小米财务底子其实不差。2023 到 2025 年，营收从 2,710 亿涨到 4,573 亿，经调整净利润从 193 亿涨到 392 亿，整体毛利率也在往上走。不过看利润要留个心眼。416 亿归母净利润里，有大约 133 亿是投资公允价值收益，不是每天都能赚到的钱。所以更该看经调整后的 392 亿。现金流也有一点压力，主要是汽车备货占用了钱，但小米账上广义现金资源有 2,326 亿。',
+      '为什么 2026 年业绩看起来没那么好？主要是三股压力一起上来了。第一，内存涨价，手机本来利润就薄，成本一涨就很难受。第二，汽车处在新旧车型切换期，一季度又亏了，汽车毛利率也从 24.3% 降到 20.1%。第三，研发和销售还在加码，短期当然会压利润。所以，2026 年更像是造车扩张和产品换代时，必须经历的一段低谷。',
+      '小米接下来靠什么增长？汽车最有想象力，也最容易出意外。新车卖得好、产能跟上，利润会有很大弹性；卖得一般，压力也会非常直接。相对稳一点的是手机高端化和 IoT 出海。互联网服务是最稳的赚钱机器。芯片和 AI 则更像远期彩蛋，值得期待，但现在还别急着把它当利润。',
+      '估值是这份研究最有意思的地方。截至 7 月 15 日，股价是 25.86 港元，离高点已经回落约 58%。按经调整口径，市盈率大概 16.7 倍，处在五年很低的位置。这不代表“小米不会再跌”，而是市场已经提前把 2026 年业绩压力算进去了。估值给的是安全垫，真正推动股价的，还是后面几季财报的数据。',
+      '我们不预测一个“必到”的目标价，只看三种可能。最悲观的情况，利润以后几乎不增长，对应股价大概 26.1 港元，和现在差不多。中性情况，利润每年增长 8%，估值回到正常水平，对应大概 39.9 港元。最乐观的情况，要靠汽车卖得更好、手机利润回暖、新车顺利推出，才有机会接近 58.9 港元。小米有赔率，但它不是躺着等涨，而是要等业绩一项项兑现。',
+      '风险也要说透。第一，汽车能不能持续赚钱？如果毛利率回不去，造车故事就会打折。第二，内存继续涨，小米手机毛利率还会不会再往下掉？第三，竞争真的很卷，华为系、比亚迪都在小米主战场抢用户。海外也有印度资产、欧洲合规和关税这些变量。最需要担心的不是某一天突然大跌，而是长期赚不到更高利润，最后被市场当成一家低增长硬件公司。',
+      '接下来别被每天的股价带节奏，盯四个数就够了。第一，手机毛利率能不能回到 10% 以上。第二，YU7 月销量和订单能不能稳住，最好能站上 2 万辆。第三，汽车毛利率能不能从一季度的 20.1% 回到 24% 以上。第四，55 万辆年度交付目标到底能完成多少。这四个数字比任何发布会口号都更重要。',
+      '最后用一句话收尾：小米的长期故事还在，短期业绩却在过坎。它有生态、有现金、有汽车和 AI 的想象力；但手机毛利率、汽车利润和交付进度，还需要后面的财报来证明。所以结论不是“立刻冲”，而是把它放进重点观察名单，等关键数据转好，再做分批决策。好生意，可能是好价格，但还要等业绩给答案。'
+    ];
+
+    // 固定画布缩放，确保 1920×1080 的排版在任意窗口都不变形。
+    function scaleStage() {
+      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      stage.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+
+    // 切页时同步保存位置与演讲稿，避免演示者刷新后丢失上下文。
+    function showSlide(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === current));
+      localStorage.setItem('xiaomi-deck-v0-slide', String(current));
+      counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+      notes.textContent = speakerNotes[current] || slides[current].dataset.note || '本页暂无口播稿。';
+    }
+
+    function toggleNotes() {
+      notesVisible = !notesVisible;
+      notes.classList.toggle('visible', notesVisible);
+    }
+
+    document.querySelector('#prev').addEventListener('click', () => showSlide(current - 1));
+    document.querySelector('#next').addEventListener('click', () => showSlide(current + 1));
+    document.querySelector('#toggle-notes').addEventListener('click', toggleNotes);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === ' ') { event.preventDefault(); showSlide(current + 1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); showSlide(current - 1); }
+      if (event.key.toLowerCase() === 'n') toggleNotes();
+    });
+    window.addEventListener('resize', scaleStage);
+    scaleStage();
+    showSlide(current);
+  </script>
+</body>
+</html>

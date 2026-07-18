@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小米：业绩筑底，估值先跌｜Headspace Meditation 风格封面</title>
+  <style>
+    :root {
+      --peach: #ffe2c5;
+      --coral: #f4a573;
+      --teal: #1b3a47;
+      --secondary: #5c6b7a;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; margin: 0; }
+    body { display: grid; min-height: 100vh; place-items: center; background: var(--teal); font-family: MiSans, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .stage-shell { --scale: 1; width: calc(1080px * var(--scale)); height: calc(1440px * var(--scale)); }
+    .cover { position: relative; width: 1080px; height: 1440px; overflow: hidden; color: var(--teal); background: var(--peach); transform: scale(var(--scale)); transform-origin: top left; }
+
+    .sun { position: absolute; top: 110px; right: 25px; width: 610px; height: 610px; border-radius: 50%; background: var(--coral); }
+    .sun::before, .sun::after { position: absolute; border: 3px solid rgba(27,58,71,.18); border-radius: 50%; content: ""; }
+    .sun::before { inset: 76px; }
+    .sun::after { inset: 156px; }
+    .cloud { position: absolute; z-index: 1; right: -126px; bottom: 256px; width: 710px; height: 360px; border-radius: 58% 42% 0 0 / 70% 72% 0 0; background: var(--coral); }
+    .cloud::before { position: absolute; top: -95px; left: 91px; width: 310px; height: 220px; border-radius: 50% 50% 20% 20%; background: var(--coral); content: ""; }
+    .orbital { position: absolute; z-index: 0; top: 430px; right: 78px; width: 460px; height: 300px; border: 4px solid var(--teal); border-radius: 52% 48% 56% 44%; opacity: .8; transform: rotate(-15deg); }
+    .orbital::before, .orbital::after { position: absolute; border-radius: 50%; background: var(--teal); content: ""; }
+    .orbital::before { top: 39px; left: 46px; width: 30px; height: 30px; }
+    .orbital::after { right: 30px; bottom: 30px; width: 48px; height: 48px; }
+
+    .topline { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 76px 80px 0; }
+    .logo-chip { display: grid; width: 194px; height: 66px; place-items: center; border-radius: 999px; background: var(--peach); box-shadow: 0 8px 24px rgba(244,165,115,.2); }
+    .logo-chip img { width: 145px; height: auto; }
+    .calm-dot { width: 26px; height: 26px; border-radius: 50%; background: var(--teal); }
+
+    .copy { position: relative; z-index: 2; width: 780px; margin: 156px 0 0 80px; }
+    .eyebrow { display: inline-block; padding: 12px 20px; border-radius: 999px; background: var(--coral); font-size: 22px; font-weight: 800; letter-spacing: .05em; }
+    h1 { max-width: 735px; margin: 42px 0 0; font-size: 108px; font-weight: 750; line-height: 1.12; letter-spacing: -.085em; text-wrap: pretty; }
+    h1 span { display: block; }
+    h1 .soft { display: inline-block; margin-top: .04em; padding: .07em .1em .08em; border-radius: .3em; background: var(--coral); line-height: 1; }
+    .subtitle { max-width: 645px; margin: 38px 0 0; font-size: 29px; font-weight: 550; line-height: 1.5; letter-spacing: -.035em; }
+
+    .metrics { position: absolute; z-index: 2; right: 80px; bottom: 100px; left: 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .metric { min-height: 226px; padding: 30px 25px; border-radius: 32px; background: var(--peach); box-shadow: 0 12px 0 rgba(27,58,71,.18), 0 8px 24px rgba(244,165,115,.22); }
+    .metric:nth-child(2) { transform: translateY(-18px); background: #ffedd5; }
+    .metric:nth-child(3) { background: var(--teal); color: var(--peach); }
+    .metric b { display: block; font-size: 56px; font-weight: 800; line-height: 1; letter-spacing: -.07em; }
+    .metric p { margin: 20px 0 0; color: var(--secondary); font-size: 21px; font-weight: 700; line-height: 1.3; letter-spacing: -.035em; }
+    .metric:nth-child(3) p { color: rgba(255,226,197,.84); }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="stage-shell">
+    <main class="cover" aria-label="小米小红书封面：业绩筑底，估值先跌">
+      <div class="sun" aria-hidden="true"></div>
+      <div class="orbital" aria-hidden="true"></div>
+      <div class="cloud" aria-hidden="true"></div>
+      <header class="topline">
+        <div class="logo-chip"><img src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"></div>
+        <span class="calm-dot" aria-hidden="true"></span>
+      </header>
+      <section class="copy">
+        <p class="eyebrow">01｜封面</p>
+        <h1><span>小米：</span><span>业绩筑底，</span><span><span class="soft">估值先跌</span></span></h1>
+        <p class="subtitle">“人车家”生态的长期稀缺性，正在与 2026 年业绩低谷拉锯。</p>
+      </section>
+      <section class="metrics" aria-label="估值数据钩子">
+        <article class="metric"><b>-58%</b><p>高点回撤</p></article>
+        <article class="metric"><b>16.7×</b><p>PE-TTM</p></article>
+        <article class="metric"><b>0.82%</b><p>五年 PE 分位</p></article>
+      </section>
+    </main>
+  </div>
+  <script>
+    const fit = () => {
+      const scale = Math.min((window.innerWidth - 32) / 1080, (window.innerHeight - 32) / 1440, 1);
+      document.querySelector('.stage-shell').style.setProperty('--scale', scale);
+    };
+    fit();
+    window.addEventListener('resize', fit);
+  </script>
+</body>
+</html>

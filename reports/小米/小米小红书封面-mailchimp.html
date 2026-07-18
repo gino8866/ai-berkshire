@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小米：业绩筑底，估值先跌｜Mailchimp Freddie 风格封面</title>
+  <style>
+    :root {
+      --yellow: #ffe01b;
+      --ink: #241c15;
+      --cream: #fbefe3;
+      --orange: #ff6900;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body { display: grid; min-height: 100vh; place-items: center; background: var(--ink); font-family: MiSans, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .stage-shell { --scale: 1; width: calc(1080px * var(--scale)); height: calc(1440px * var(--scale)); }
+    .cover { position: relative; width: 1080px; height: 1440px; overflow: hidden; color: var(--ink); background: var(--cream); transform: scale(var(--scale)); transform-origin: top left; }
+
+    .yellow-field { position: absolute; top: -190px; right: -150px; width: 715px; height: 805px; border: 3px solid var(--ink); border-radius: 48% 52% 45% 55%; background: var(--yellow); transform: rotate(12deg); }
+    .orange-stamp { position: absolute; top: 208px; right: 142px; width: 88px; height: 88px; border: 3px solid var(--ink); border-radius: 44% 56% 51% 49%; background: var(--orange); transform: rotate(-10deg); }
+    .scribble { position: absolute; z-index: 0; right: 34px; top: 415px; width: 510px; height: 475px; }
+    .scribble path, .scribble circle { vector-effect: non-scaling-stroke; }
+
+    .topline { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 72px 80px 0; }
+    .logo-chip { display: grid; width: 196px; height: 64px; place-items: center; border: 3px solid var(--ink); border-radius: 20px; background: var(--cream); transform: rotate(-2deg); }
+    .logo-chip img { width: 146px; height: auto; }
+    .page-dot { width: 24px; height: 24px; border: 3px solid var(--ink); border-radius: 50%; background: var(--orange); }
+
+    .copy { position: relative; z-index: 2; width: 770px; margin: 148px 0 0 80px; }
+    .eyebrow { display: inline-block; padding: 11px 18px 10px; border: 3px solid var(--ink); border-radius: 999px; background: var(--yellow); font-size: 22px; font-weight: 800; letter-spacing: .06em; transform: rotate(-2deg); }
+    h1 { max-width: 700px; margin: 38px 0 0; font-size: 114px; line-height: .98; font-weight: 900; letter-spacing: -.09em; text-wrap: pretty; }
+    h1 span { display: block; }
+    h1 .accent { color: var(--orange); letter-spacing: -.12em; transform: rotate(-1deg); }
+    .marker { position: relative; display: inline-block; z-index: 0; }
+    .marker::after { position: absolute; z-index: -1; right: -8px; bottom: 1px; left: -7px; height: 26px; border-radius: 50%; background: var(--yellow); content: ""; transform: rotate(-2deg); }
+    .subtitle { max-width: 665px; margin-top: 38px; font-size: 29px; font-weight: 650; line-height: 1.45; letter-spacing: -.035em; }
+
+    .metrics { position: absolute; z-index: 2; right: 80px; bottom: 100px; left: 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .metric { min-height: 230px; padding: 28px 24px; border: 3px solid var(--ink); border-radius: 24px; background: var(--cream); box-shadow: 7px 8px 0 var(--ink); transform: rotate(var(--tilt)); }
+    .metric:nth-child(1) { --tilt: -2deg; background: var(--yellow); }
+    .metric:nth-child(2) { --tilt: 1deg; }
+    .metric:nth-child(3) { --tilt: -1deg; background: var(--orange); }
+    .metric b { display: block; font-size: 56px; line-height: 1; font-weight: 900; letter-spacing: -.07em; }
+    .metric p { margin: 20px 0 0; font-size: 21px; font-weight: 750; line-height: 1.28; letter-spacing: -.035em; }
+    .metric:nth-child(3) b, .metric:nth-child(3) p { color: var(--cream); }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="stage-shell">
+    <main class="cover" aria-label="小米小红书封面：业绩筑底，估值先跌">
+      <div class="yellow-field" aria-hidden="true"></div>
+      <div class="orange-stamp" aria-hidden="true"></div>
+      <svg class="scribble" viewBox="0 0 510 475" fill="none" aria-hidden="true">
+        <path d="M36 160C115 59 274 32 388 96c123 69 100 228-8 267-97 35-212-11-245-94-34-85 43-144 136-109 63 23 100 92 59 150-42 60-142 31-146-35-5-66 96-105 189-70" stroke="#241c15" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 16"/>
+        <path d="M82 380c70-72 169-99 288-60" stroke="#ff6900" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="77" cy="161" r="13" fill="#ff6900" stroke="#241c15" stroke-width="4"/>
+        <circle cx="420" cy="224" r="18" fill="#ffe01b" stroke="#241c15" stroke-width="4"/>
+        <circle cx="345" cy="378" r="10" fill="#241c15"/>
+      </svg>
+
+      <header class="topline">
+        <div class="logo-chip"><img src="assets/xiaomi-brand/xiaomi-logo.svg" alt="小米"></div>
+        <span class="page-dot" aria-hidden="true"></span>
+      </header>
+
+      <section class="copy">
+        <p class="eyebrow">01｜封面</p>
+        <h1><span>小米：</span><span class="accent">业绩筑底，</span><span><span class="marker">估值先跌</span></span></h1>
+        <p class="subtitle">“人车家”生态的长期稀缺性，正在与 2026 年业绩低谷拉锯。</p>
+      </section>
+
+      <section class="metrics" aria-label="估值数据钩子">
+        <article class="metric"><b>-58%</b><p>高点回撤</p></article>
+        <article class="metric"><b>16.7×</b><p>PE-TTM</p></article>
+        <article class="metric"><b>0.82%</b><p>五年 PE 分位</p></article>
+      </section>
+    </main>
+  </div>
+  <script>
+    const fit = () => {
+      const scale = Math.min((window.innerWidth - 32) / 1080, (window.innerHeight - 32) / 1440, 1);
+      document.querySelector('.stage-shell').style.setProperty('--scale', scale);
+    };
+    fit();
+    window.addEventListener('resize', fit);
+  </script>
+</body>
+</html>
