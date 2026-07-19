@@ -70,6 +70,8 @@ This is a Codex-only hand-written skill kept under `codex-skills/` for simple in
 - Write in clear investor prose. A good memo should be understandable after one read and useful after one month.
 - Keep memorable formulations, but never let rhetoric outrun evidence.
 - Avoid hiding behind vague labels such as "wait and see" without specifying the price or event that would change the recommendation.
+- Normalize money presentation aggressively: keep RMB amounts in RMB; convert all non-RMB amounts to USD by default unless the user explicitly asks for another reporting currency.
+- Do not mix TWD/HKD/EUR/USD across the same report section, table, valuation block, or action band. If a value is converted, state the FX assumption and any ADR/share conversion assumption once near the top.
 
 ## Layout Standards
 
@@ -78,6 +80,7 @@ For long-form research reports, prefer a calm stepped layout:
 - Use a simple title: `公司名（ticker）研究报告`. Avoid adding "四大师综合" or "投资备忘录" to the title unless the user asks for that framing.
 - Use dated filenames for reports: `公司名研究报告-YYYYMMDD.md`.
 - Start with one compact metadata block: research date, price, market cap, key multiples, and a one-sentence thesis.
+- In that metadata block, keep money units consistent with the report default: RMB stays RMB; other currencies default to USD.
 - Use horizontal separators between major sections.
 - Use Chinese step headings for readability, for example "第一步：核心数据总览", "第二步：生意本质分析", and "第八步：最终决策与行动清单".
 - Keep section titles short and concrete; avoid dense numbering such as "2.3.1" unless the document is technical.
