@@ -1,0 +1,108 @@
+---
+name: ai-capex-deep-tracker
+description: Use when producing a source-backed, five-quarter analysis of AI CapEx by major cloud companies and validating it against NVIDIA, AMD, and Broadcom disclosures.
+---
+
+## Codex adapter note
+
+This skill is generated from `skills/ai-capex-deep-tracker.md` so Claude Code and Codex users share one canonical workflow.
+
+- Treat `$ARGUMENTS` as the user's request in the current Codex thread.
+- When the source mentions Claude-only surfaces such as Task, Agent, WebSearch, Bash, Read, or Write, use the closest Codex capability available in this session: subagents when available, web search when needed, shell commands for local tools, and normal file edits for workspace files.
+- Use shared project tools from `tools/` in this repository. Prefer running commands from the repository root with paths like `python3 tools/financial_rigor.py ...`; if the current thread starts outside the repo, locate the actual checkout path first instead of assuming a fixed home-directory path.
+- Before starting research, run the `date` command to confirm today's date; treat it as the baseline for "latest" data and state the data cutoff date in the report header. Never assume the current date from training data.
+- Preserve the research quality rules from `AGENTS.md`: cross-check financial data, use exact arithmetic tools for valuation/math, and clearly label uncertainty and source gaps.
+
+# AI CapEx 深度跟踪与复核
+
+进行 `$ARGUMENTS` 季度的AI CapEx 的深度跟踪、计算与复核。默认输出一份中文 Markdown 报告，覆盖需求端云厂商与 GPU / ASIC 供应端，回答：钱投了多少、其中多少可以可靠归因于 AI、投入能否持续、以及供应端是否证实需求已经真实落地。
+
+## 目标
+
+- 跟踪 Microsoft、Amazon、Alphabet、Meta、Oracle 的最新 AI 基础设施投入及其过去五个财季趋势
+- 用 NVIDIA、AMD、Broadcom 已确认的 GPU / ASIC 营收及其环比变化，反推需求端 AI 硬件投入的实际落地情况
+
+
+## 分析步骤
+
+### 1. 建立来源登记与财季对齐
+
+为每家公司建立来源登记表，至少列出：文件类型、URL、发布日期、财季、可用定位和用途。
+
+- 需求端：本季及过去五季的 10-Q / 10-K 或等价监管文件、业绩新闻稿、官方电话会材料、年度/季度指引材料。
+- 供应端：最近五个财季的财报、电话会材料、投资者演示和官方指引；记录与**整体云厂商 CapEx 周期**对应的 `t`、`t+1`、`t+2` 供应端窗口。
+- 记录供应端与需求端报告日、财季结束日的时间差。GPU / ASIC 的供应商收入通常在硬件交付时确认，云厂商的采购决策、设备接收、融资租赁起租和现金支付可能分别发生在前后财季；因此不得假定零时滞或严格一对一对应。
+
+如文件或字段未披露，写 `未披露`；如官方材料不可得，写 `来源缺口`。不要用猜测填表。
+
+### 2. 统一总 CapEx 口径并复算
+
+每个需求端公司同时列示下列项目，保留其原始披露名称与币种：
+
+| 字段 | 要求 |
+| --- | --- |
+| 公司披露总 CapEx | 公司新闻稿或电话会采用的总额及其定义 |
+| 现金 PP&E | 现金流量表中的 purchases / additions to PP&E 等原始项目 |
+| 融资租赁本金 | 仅在公司明确把其纳入 CapEx 或可单独披露时列示 |
+| 其他调整项 | 仅列公司披露、且与口径统一直接相关的资本化投入 |
+| 统一口径 CapEx | 展示组成、加减项、公式与是否可与前期比较 |
+
+使用 `python3 tools/financial_rigor.py calc --expr '...'` 或等价精确算术复算：
+
+- 环比：`(本季统一口径 CapEx - 上季统一口径 CapEx) / 上季统一口径 CapEx`
+- 同比：`(本季统一口径 CapEx - 上年同期统一口径 CapEx) / 上年同期统一口径 CapEx`
+- CapEx / CFO：`统一口径 CapEx / CFO`
+- FCF：`CFO - 统一口径 CapEx`
+- 指引中值变化：`最新指引中值 / 年初指引中值 - 1`
+
+不得把 cash paid、PP&E additions、融资租赁本金或公司自定义 CapEx 静默混用。若无法统一，分别展示并说明不可比原因。
+
+### 3. 评估投入意愿与持续投入能力
+
+对每家需求端公司分别给出“意愿”和“能力”判断，并以证据支持：
+
+- **投入意愿**：管理层对 AI 战略、数据中心扩张、GPU / 自研芯片部署、客户订单或产品变现的原话；官方 CapEx 指引的上修、维持或下修。
+- **持续投入能力**：CFO、FCF、现金及流动性、债务、融资租赁承诺、近期盈利能力和管理层对融资/成本的说明。
+
+默认报告使用以下固定表头，不增加或拆分列：
+
+| 公司 | 持续投入意愿：管理层/客户证据 | 资金能力：当季或最近披露 | 结论 |
+| --- | --- | --- | --- |
+
+- `持续投入意愿`：列出管理层对 AI 战略、数据中心扩张、GPU / 自研芯片部署、客户订单或产品变现的证据，以及官方 CapEx 指引变化。
+- `资金能力`：列出 CFO、FCF、现金及流动性、债务、融资租赁承诺、近期盈利能力和管理层对融资/成本的说明。
+- `结论`：仅使用 `强 / 中性 / 弱 / 待验证`。每家公司至少附两条可追溯证据；证据不足时写 `待验证`，不要用综合印象替代。
+
+### 4. 用 GPU / ASIC 营收反推实际投入
+
+供应端验证的主目标不是泛泛证明“AI 需求很强”，而是判断**整体云厂商 AI CapEx 预期**是否已经转化为实际交付的 GPU / ASIC 硬件支出，以及该周期是加速、维持还是放缓。
+
+对 NVIDIA、AMD、Broadcom 分别提取最近五个财季、且能由公司一手材料确认的以下字段：
+
+| 字段 | 规则 |
+| --- | --- |
+| `AI GPU / ASIC 收入` | 只取明确披露的 AI GPU / 加速器、定制 AI ASIC 或 AI 半导体收入；记录产品定义、币种和财季 |
+| `环比变化` | `本季收入 ÷ 上季收入 - 1`，使用精确算术复算 |
+| `收入性质` | 标记为 `确认`、`包含非 AI 产品的代理指标` 或 `未披露` |
+| `客户映射` | 仅记录公司公开披露的 hyperscaler 客户、部署、采购承诺或设计赢单；没有直接披露时标为 `篮子信号` |
+| `交付/供给证据` | 量产、出货、供不应求、库存、交付周期、产能和下一季指引 |
+
+数据中心总收入、CPU 收入、通用网络收入或游戏收入不得自动计入“AI GPU / ASIC 收入”。例如，供应商只披露包含 CPU、GPU 与其他产品的数据中心分部时，该数字只能作 `代理指标`，不能与明确的 GPU / ASIC 收入相加。
+
+可以汇总口径一致的供应商 AI GPU / ASIC 收入，形成“**已确认交付的 AI 芯片营收池**”；但该营收池是供应商收入，不是云厂商 CapEx，且不能按市场份额分摊给单一客户。
+
+报告的整体周期对照还应计算“**供应端 AI 基建混合口径收入池**”：将 NVIDIA 数据中心收入、AMD 数据中心收入和 Broadcom AI 半导体收入直接相加。该收入池必须显著标注为混合口径：NVIDIA、AMD 是包含非 AI 产品的代理指标，Broadcom 是确认 AI 半导体口径。它只用于验证整体 CapEx 与交付收入的方向、速度和时滞，不是纯 AI 芯片收入、市场规模或云厂商 CapEx。
+
+
+## 报告输出结构
+
+默认只输出一份中文 Markdown 总报告，顺序固定如下：
+
+1. **报告头部**：数据截止日、覆盖公司、最新可得财季、来源政策与重要缺口。
+2. **核心结论**：只包含以下四项，不加入 AI CapEx 归因、供应端验证或其他扩展判断：
+   - 当前财季 CapEx 支出；
+   - 相对上一财季的环比变化；
+   - 相对年初或前次官方 CapEx 指引的差异，标记为 `上修 / 维持 / 下修 / 未披露`；
+   - 对下一财季与全年投入方向的预测，并明确区分 `管理层指引` 与 `推论`。
+3. **云厂商投入意愿与能力**：严格使用 `公司｜持续投入意愿：管理层/客户证据｜资金能力：当季或最近披露｜结论` 四列表头，结论仅使用 `强 / 中性 / 弱 / 待验证`。
+4. **数据底稿**：展示当季披露数据、AI CapEx 的 `确认值 / 可计算估算 / 无法量化`、计算公式、来源定位和数据源清单；

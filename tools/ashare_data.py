@@ -25,8 +25,10 @@ _TIMEOUT = 15
 
 def _curl(url):
     """用 curl --noproxy 直连，绕过系统代理。"""
+    import shutil
+    curl_path = shutil.which("curl") or "/usr/bin/curl"
     result = subprocess.run(
-        ["/usr/bin/curl", "-s", "--noproxy", "*",
+        [curl_path, "-s", "--noproxy", "*",
          "-H", "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
          url],
         capture_output=True, timeout=_TIMEOUT,

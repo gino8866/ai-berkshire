@@ -21,6 +21,14 @@ import math
 import sys
 from decimal import Decimal, Context, ROUND_HALF_EVEN, InvalidOperation
 
+_STDOUT_ENCODING = (getattr(sys.stdout, "encoding", "") or "").lower()
+if _STDOUT_ENCODING and _STDOUT_ENCODING != "utf-8" and hasattr(sys.stdout, "reconfigure"):
+    try:
+        # 避免 Windows 非 UTF-8 控制台因 emoji 输出直接中断验证流程。
+        sys.stdout.reconfigure(errors="replace")
+    except ValueError:
+        pass
+
 # ---------------------------------------------------------------------------
 # Exact Decimal Engine (no floating-point drift)
 # ---------------------------------------------------------------------------
@@ -52,6 +60,28 @@ def fmt_number(d: Decimal, unit: str = "") -> str:
     if abs_v >= 1e6:
         return f"{v/1e6:.2f}M"
     return f"{v:,.2f}"
+
+
+def parse_source_values(raw: str) -> dict:
+    """Parse CLI mapping values, with a simple PowerShell-compatible fallback."""
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError as exc:
+        text = raw.strip()
+        if not (text.startswith("{") and text.endswith("}")):
+            raise
+
+        body = text[1:-1].strip()
+        if not body:
+            return {}
+
+        parsed = {}
+        for item in body.split(","):
+            if ":" not in item:
+                raise exc
+            key, value = item.split(":", 1)
+            parsed[key.strip().strip("\"'")] = float(value.strip())
+        return parsed
 
 
 # ---------------------------------------------------------------------------
@@ -430,7 +460,7 @@ Examples:
         verify_valuation(args.price, args.eps, args.bvps, args.fcf_per_share,
                         args.dividend, args.revenue_per_share)
     elif args.command == "cross-validate":
-        values = json.loads(args.values)
+        values = parse_source_values(args.values)
         cross_validate(args.field, values, args.unit, args.tolerance)
     elif args.command == "benford":
         values = json.loads(args.values)
