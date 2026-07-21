@@ -87,21 +87,27 @@ reports/{公司名}/
 
 ## GitHub 操作
 
-- 本地克隆路径：`~/ai-berkshire/`
-- 远程仓库：`https://github.com/xbtlin/ai-berkshire.git`
-- 推送前先 `git pull --rebase origin main`（远程经常有新提交）
+- 本地仓库：`~/ai-berkshire/`
+- 远程：origin = `xbtlin/ai-berkshire`（上游，只读同步）、gino = `gino8866/ai-berkshire`（个人 fork，**推送目标**）
+- 日常推送：直接 `git push gino main`（最简，不 rebase）
+- 同步上游：需要时 `git merge origin/main`（不用 rebase，保留历史）
 - commit message 用中文，描述清楚改了什么
 - 不要推送中间过程文件（如 data_collection.md），只推最终报告
 
 ## 常用命令
 
 ```bash
-# 推送报告到GitHub
+# 日常推送（最简，直接推个人 fork）
 cd ~/ai-berkshire
 git add reports/xxx.md
 git commit -m "添加xxx报告"
-git pull --rebase origin main
-git push origin main
+git push gino main
+
+# 需要同步上游时（你决定何时）
+git fetch origin && git merge origin/main && git push gino main
+
+# 仅当 push gino 被 non-fast-forward 拒绝时（fork 被别处推过）
+git push gino main --force-with-lease
 ```
 
 ## 注意事项
